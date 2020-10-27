@@ -8,5 +8,5 @@ import java.util.Optional;
 
 public interface AlunoRepository extends JpaRepository<Aluno, Long> {
 
-    Optional<List<Aluno>> findByActive(Boolean active);
+    List<Aluno> findByActive(Boolean active);
 }

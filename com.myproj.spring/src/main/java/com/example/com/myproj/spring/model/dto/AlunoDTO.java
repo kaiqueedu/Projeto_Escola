@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class AlunoDTO {
 
-    private int id;
+    private Long id;
     private String name;
     private String classe;
     private boolean active;

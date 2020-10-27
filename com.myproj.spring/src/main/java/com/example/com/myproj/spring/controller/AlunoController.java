@@ -6,6 +6,7 @@ import com.example.com.myproj.spring.service.AlunoService;
 import com.example.com.myproj.spring.model.Aluno;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,19 +30,20 @@ public class AlunoController {
     //@GetMapping("/jovem-pan")
     //localhost/8080/aluno/jovem-apan
     @GetMapping
-    public ResponseEntity getAlunos(){
-        //System.out.println("teste getMapping");
-        //return new ResponseEntity<List<String>>(alunoService.getAluno(), HttpStatus.OK);
-        return ResponseEntity.ok(alunoService.getAlunos());
+    public ResponseEntity<List<AlunoDTO>> getAlunos(){
+
+        return new ResponseEntity<>(alunoService.getAlunos(), HttpStatus.ACCEPTED);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity getAluno(@PathVariable long id){
+    public ResponseEntity getAlunoById(@PathVariable Long id){
+
         return ResponseEntity.ok(alunoService.getAlunoById(id));
     }
 
     @GetMapping("/active")
     public ResponseEntity getAlunosAtivos(){
+
         return ResponseEntity.ok(alunoService.getAlunosAtivos());
     }
 
@@ -55,7 +57,6 @@ public class AlunoController {
     @DeleteMapping("/{id}")
     public ResponseEntity deleteAluno(@PathVariable long id){
         alunoService.deleteAluno((int)id);
-        //alunoService.deleteAluno(id);
         return ResponseEntity.ok().build();
     }
 

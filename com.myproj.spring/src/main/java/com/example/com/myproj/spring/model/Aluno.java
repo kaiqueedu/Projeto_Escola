@@ -12,13 +12,14 @@ import javax.persistence.Id;
 import java.io.Serializable;
 
 @Data
-@Entity
 @AllArgsConstructor
+@NoArgsConstructor
+@Entity
 public class Aluno implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     private String name;
     private String classe;
     private boolean active = true;

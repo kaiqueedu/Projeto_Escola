@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class AlunoService {
@@ -32,26 +33,31 @@ public class AlunoService {
     @Autowired
     AlunoRepository alunoRepository;
 
-    public List<Aluno> getAlunos(){
-        return alunoRepository.findAll();
+    public List<AlunoDTO> getAlunos(){
+        return alunoRepository.findAll()
+                              .stream()
+                              .map(AlunoMapper::toAlunoDTO)
+                              .collect(Collectors.toList());
     }
 
-    public Optional<AlunoDTO> getAlunoById(@PathVariable long id){
-        return alunoRepository.findById(id).map(AlunoMapper::toAlunoDTO);
+    public AlunoDTO getAlunoById(@PathVariable Long id) {
+        //return AlunoMapper.toAlunoDTO(alunoRepository.findById(id));
+        return alunoRepository.findById(id).map(AlunoMapper::toAlunoDTO).orElse(null); // Lançar exception
     }
 
     public AlunoDTO criaAluno(@RequestBody AlunoDTO dto){
-        Aluno aluno = AlunoMapper.toAluno(dto);
-        alunoRepository.save(aluno);
+        Aluno aluno = alunoRepository.save(AlunoMapper.toAluno(dto));
         return AlunoMapper.toAlunoDTO(aluno);
     }
 
     public void deleteAluno(@PathVariable long id){
-        alunoRepository.deleteById((id));
+
+        alunoRepository.deleteById(id);
     }
 
-    public Optional<List<Aluno>> getAlunosAtivos() {
-        return alunoRepository.findByActive(true);
+    public List<AlunoDTO> getAlunosAtivos() {
+
+        return alunoRepository.findByActive(true).stream().map(AlunoMapper::toAlunoDTO).collect(Collectors.toList());
     }
 
 }
