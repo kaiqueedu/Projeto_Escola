@@ -1,6 +1,8 @@
 package com.example.com.myproj.spring.service;
 
 import com.example.com.myproj.spring.model.Mentor;
+import com.example.com.myproj.spring.model.dto.MentorDTO;
+import com.example.com.myproj.spring.model.mappers.MentorMapper;
 import com.example.com.myproj.spring.repository.MentorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,6 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class MentorService {
@@ -17,23 +20,30 @@ public class MentorService {
     @Autowired
     MentorRepository mentorRepository;
 
-    public List<Mentor> getMentor(){
-        System.out.println("Buscando todos os mentores");
-        return mentorRepository.findAll();
+    public List<MentorDTO> getMentores(){
+        return mentorRepository.findAll()
+                                .stream()
+                                .map(MentorMapper::toMentorDTO)
+                                .collect(Collectors.toList());
     }
 
-    public Optional<Mentor> getMentorByIndex(long id) {
-        System.out.println("Buscando mentor pelo id");
-        return mentorRepository.findById(id);
+    public MentorDTO getMentorByIndex(long id) {
+
+        return mentorRepository.findById(id).map(MentorMapper::toMentorDTO).orElse(null);
     }
 
-    public void criaMentor(Mentor mentor) {
-        System.out.println("Inserindo um mentor");
-        mentorRepository.save(mentor);
+    public List<MentorDTO> getMentorByActive() {
+
+        return mentorRepository.findByActive(true).stream().map(MentorMapper::toMentorDTO).collect(Collectors.toList());
+    }
+
+    public MentorDTO criaMentor(MentorDTO mentorDTO) {
+
+        return MentorMapper.toMentorDTO(mentorRepository.save(MentorMapper.toMentor(mentorDTO)));
     }
 
     public void deleteMentor(long id){
-        System.out.println("Delentando o mentor: " + id);
+
         mentorRepository.deleteById(id);
     }
 

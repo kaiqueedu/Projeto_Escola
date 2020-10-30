@@ -5,10 +5,7 @@ import lombok.Data;
 import lombok.Generated;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Data
@@ -20,13 +17,16 @@ public class Aluno implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
+    private String nome;
     private String classe;
+    @Column(nullable = false, columnDefinition = "TINYINT(1) default 1")
     private boolean active = true;
 
-    //Getter and Setter criando pelo lombok com a
-    // declaração @Data
-    //@NoArgsConstructor criar um construtor sem argumentos
-    // pelo lombok
+    public Aluno(Long id, String nome, String classe){
+        this.id = id;
+        this.nome = nome;
+        this.classe = classe;
+        active = true;
+    }
 
 }

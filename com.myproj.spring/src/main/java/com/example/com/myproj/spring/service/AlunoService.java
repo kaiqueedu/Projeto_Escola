@@ -2,13 +2,13 @@ package com.example.com.myproj.spring.service;
 
 import com.example.com.myproj.spring.model.Aluno;
 import com.example.com.myproj.spring.model.dto.AlunoDTO;
+import com.example.com.myproj.spring.model.mappers.AlunoMapper;
 import com.example.com.myproj.spring.repository.AlunoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -46,8 +46,8 @@ public class AlunoService {
     }
 
     public AlunoDTO criaAluno(@RequestBody AlunoDTO dto){
-        Aluno aluno = alunoRepository.save(AlunoMapper.toAluno(dto));
-        return AlunoMapper.toAlunoDTO(aluno);
+
+        return AlunoMapper.toAlunoDTO(alunoRepository.save(AlunoMapper.toAluno(dto)));
     }
 
     public void deleteAluno(@PathVariable long id){

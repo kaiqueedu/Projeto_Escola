@@ -49,9 +49,9 @@ public class AlunoController {
 
     // aqui pega no body da resquest
     @PostMapping
-    public ResponseEntity<Boolean> criaAluno(@RequestBody AlunoDTO dto){
-        AlunoDTO alunoSalvo = alunoService.criaAluno(dto);
-        return ResponseEntity.created( URI.create("/aluno/" + alunoSalvo.getId() ) ).build();
+    public ResponseEntity<Boolean> criaAluno(@RequestBody AlunoDTO alunoDTO){
+        AlunoDTO alunoSalvo = alunoService.criaAluno(alunoDTO);
+        return ResponseEntity.created( URI.create( "/aluno/" + alunoSalvo.getId() ) ).build();
     }
 
     @DeleteMapping("/{id}")

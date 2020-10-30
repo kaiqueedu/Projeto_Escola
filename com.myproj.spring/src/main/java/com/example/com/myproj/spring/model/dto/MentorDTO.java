@@ -7,10 +7,11 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class AlunoDTO {
+public class MentorDTO {
 
-    private Long id;
+    private long id;
     private String nome;
-    private String classe;
+    private String materia;
+    private Boolean active;
 
 }
