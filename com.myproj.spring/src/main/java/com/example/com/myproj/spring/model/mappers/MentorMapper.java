@@ -12,7 +12,11 @@ public class MentorMapper {
 
     public static MentorDTO toMentorDTO(Mentor m){
 
+<<<<<<< HEAD
         return new MentorDTO(m.getId(), m.getNome(), m.getMateria());
+=======
+        return new MentorDTO(m.getId(), m.getNome(), m.getMateria(), m.getActive());
+>>>>>>> 5bd4bd5390ea98090e757faf44fbf509ce4913b1
     }
 
 }

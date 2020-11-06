@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -54,7 +53,11 @@ public class AlunoService {
         return alunoRepository.findById(id).map(AlunoMapper::toAlunoDTO).orElse(null); // Lançar exception
     }
 
+<<<<<<< HEAD
     public AlunoDTO criaAluno(@RequestBody AlunoDTO dto) {
+=======
+    public AlunoDTO criaAluno(@RequestBody AlunoDTO dto){
+>>>>>>> 5bd4bd5390ea98090e757faf44fbf509ce4913b1
 
         return AlunoMapper.toAlunoDTO(alunoRepository.save(AlunoMapper.toAluno(dto)));
     }

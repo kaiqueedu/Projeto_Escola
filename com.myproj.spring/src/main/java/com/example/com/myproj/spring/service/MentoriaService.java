@@ -57,7 +57,11 @@ public class MentoriaService {
             return null;
         }
 
+<<<<<<< HEAD
         LocalDate dataInicio = LocalDate.now();
+=======
+        Instant dataInicio = Instant.now();
+>>>>>>> 5bd4bd5390ea98090e757faf44fbf509ce4913b1
 
         return MentoriaMapper.toMentoriaDTO(mentoriaRepository.save( new Mentoria(null,aluno, mentor, dataInicio, dto.getDataFim(), true) ) );
 

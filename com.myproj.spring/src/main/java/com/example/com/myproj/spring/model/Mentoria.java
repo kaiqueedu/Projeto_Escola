@@ -26,7 +26,11 @@ public class Mentoria {
     @JoinColumn(name="mentor_id")
     private Mentor mentor;
 
+<<<<<<< HEAD
     private LocalDate dataInicio;
+=======
+    private Instant dataInicio;
+>>>>>>> 5bd4bd5390ea98090e757faf44fbf509ce4913b1
     private LocalDate dataFim;
 
     @Column(nullable = false, columnDefinition = "TINYINT(1) default 1")

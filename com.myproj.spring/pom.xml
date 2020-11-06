@@ -66,7 +66,10 @@
 			<version>1.3.1.Final</version>
 		</dependency>
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 5bd4bd5390ea98090e757faf44fbf509ce4913b1
 	</dependencies>
 
 	<build>
@@ -76,6 +79,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 
+<<<<<<< HEAD
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -98,6 +102,8 @@
 				</configuration>
 			</plugin>
 
+=======
+>>>>>>> 5bd4bd5390ea98090e757faf44fbf509ce4913b1
 		</plugins>
 
 	</build>

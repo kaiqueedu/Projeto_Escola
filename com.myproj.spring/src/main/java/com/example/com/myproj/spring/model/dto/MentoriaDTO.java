@@ -17,7 +17,11 @@ public class MentoriaDTO {
     private Long id;
     private Long alunoId;
     private Long mentorId;
+<<<<<<< HEAD
     private LocalDate dataInicio;
+=======
+    private Instant dataInicio;
+>>>>>>> 5bd4bd5390ea98090e757faf44fbf509ce4913b1
     private LocalDate dataFim;
 
 }
