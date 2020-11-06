@@ -2,6 +2,7 @@ package com.example.com.myproj.spring.service;
 
 import com.example.com.myproj.spring.model.Aluno;
 import com.example.com.myproj.spring.model.dto.AlunoDTO;
+import com.example.com.myproj.spring.model.mappers.AlunoMapper;
 import com.example.com.myproj.spring.repository.AlunoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,11 +34,19 @@ public class AlunoService {
     @Autowired
     AlunoRepository alunoRepository;
 
-    public List<AlunoDTO> getAlunos(){
+    public List<AlunoDTO> getAlunos(Optional<Boolean> active) {
+
+        if (active.isPresent()) {
+            return alunoRepository.findByActive(active.get())
+                                  .stream()
+                                  .map(AlunoMapper::toAlunoDTO)
+                                  .collect(Collectors.toList());
+        }
+
         return alunoRepository.findAll()
-                              .stream()
-                              .map(AlunoMapper::toAlunoDTO)
-                              .collect(Collectors.toList());
+                .stream()
+                .map(AlunoMapper::toAlunoDTO)
+                .collect(Collectors.toList());
     }
 
     public AlunoDTO getAlunoById(@PathVariable Long id) {
@@ -45,12 +54,12 @@ public class AlunoService {
         return alunoRepository.findById(id).map(AlunoMapper::toAlunoDTO).orElse(null); // Lançar exception
     }
 
-    public AlunoDTO criaAluno(@RequestBody AlunoDTO dto){
-        Aluno aluno = alunoRepository.save(AlunoMapper.toAluno(dto));
-        return AlunoMapper.toAlunoDTO(aluno);
+    public AlunoDTO criaAluno(@RequestBody AlunoDTO dto) {
+
+        return AlunoMapper.toAlunoDTO(alunoRepository.save(AlunoMapper.toAluno(dto)));
     }
 
-    public void deleteAluno(@PathVariable long id){
+    public void deleteAluno(@PathVariable long id) {
 
         alunoRepository.deleteById(id);
     }

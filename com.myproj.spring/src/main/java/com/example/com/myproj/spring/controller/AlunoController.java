@@ -30,9 +30,9 @@ public class AlunoController {
     //@GetMapping("/jovem-pan")
     //localhost/8080/aluno/jovem-apan
     @GetMapping
-    public ResponseEntity<List<AlunoDTO>> getAlunos(){
+    public ResponseEntity<List<AlunoDTO>> getAlunos(@RequestParam("active") Optional<Boolean> active){
 
-        return new ResponseEntity<>(alunoService.getAlunos(), HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(alunoService.getAlunos(active), HttpStatus.ACCEPTED);
     }
 
     @GetMapping("/{id}")
@@ -49,9 +49,9 @@ public class AlunoController {
 
     // aqui pega no body da resquest
     @PostMapping
-    public ResponseEntity<Boolean> criaAluno(@RequestBody AlunoDTO dto){
-        AlunoDTO alunoSalvo = alunoService.criaAluno(dto);
-        return ResponseEntity.created( URI.create("/aluno/" + alunoSalvo.getId() ) ).build();
+    public ResponseEntity<Boolean> criaAluno(@RequestBody AlunoDTO alunoDTO){
+        AlunoDTO alunoSalvo = alunoService.criaAluno(alunoDTO);
+        return ResponseEntity.created( URI.create( "/aluno/" + alunoSalvo.getId() ) ).build();
     }
 
     @DeleteMapping("/{id}")
